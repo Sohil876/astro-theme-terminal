@@ -141,9 +141,13 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
               }
               
               // Adjust dropdown position if it goes outside container
-              if (dropdown.getBoundingClientRect().right > container.getBoundingClientRect().right) {
-                dropdown.style.left = "auto";
-                dropdown.style.right = "0";
+              if (container && dropdown instanceof HTMLElement) {
+                  const dropdownRect = dropdown.getBoundingClientRect();
+                  const containerRect = container.getBoundingClientRect();
+                  if (dropdownRect.right > containerRect.right) {
+                      dropdown.style.left = "auto";
+                      dropdown.style.right = "0";
+                  }
               }
             });
             
